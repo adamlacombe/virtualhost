@@ -153,6 +153,13 @@ if [ "$action" == 'create' ]
 		### restart Apache
 		systemctl restart apache2
 
+		cecho y "Would you like to run composer install ? (y/n)"
+		read runComposer
+
+		if [ "$runComposer" == 'y' -o "$runComposer" == 'Y' ]; then
+		    sudo -u $owner -H sh -c "composer install"
+		fi
+
 		### show the finished message
 		cecho g "Complete! \nYou now have a new Virtual Host \nYour new host is: http://$domain \nAnd its located at $rootDir"
 		exit;
